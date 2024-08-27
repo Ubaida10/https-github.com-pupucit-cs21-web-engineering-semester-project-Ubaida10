@@ -1,0 +1,56 @@
+﻿@*Define model*@
+
+@*Define ViewData*@
+
+
+@*Write Code*@
+
+
+
+@model IEnumerable<CineTix.Models.Entity_Classes.Movie>
+
+@{
+    ViewData["Title"] = "Home Page";
+    var movieList = Model.ToList();
+}
+
+<div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel" style="width: 100%; height: auto; overflow: hidden;">
+    <div class="carousel-inner" style="width: 100%; height: auto;">
+        @for (int i = 0; i < movieList.Count; i++)
+        {
+            <div class="carousel-item @(i == 0 ? "active" : "")">
+                <img src="@movieList[i].PortraitUrl" alt="@movieList[i].Title" style="width: 100%; height: auto; object-fit: cover;">
+            </div>
+        }
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+
+
+
+
+
+
+<div class="container px-2">
+    <h1 class="my-4 text-center" style="color: #F5F5DC;">Movies</h1>
+    @if (Model.Any())
+    {
+        <div class="d-flex flex-row flex-wrap justify-content-around mb-5">
+            @foreach (var movies in Model)
+            {
+                <div class="card me-3 mb-3" style="width: 18rem; background-color:black">
+                    <a href="@Url.Action("Details", "Movies", new { id = movies.Id })" class="btn">
+                        <img src="@movies.ImageUrl" class="card-img-top" alt="@movies.Title" style="height: 27rem; width: 18rem;">
+                    </a>
+                </div>
+            }
+        </div>
+    }
+</div>

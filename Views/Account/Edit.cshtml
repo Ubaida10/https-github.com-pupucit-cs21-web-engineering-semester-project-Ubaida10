@@ -1,0 +1,69 @@
+@model CineTix.Data.Register
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body style="background-color: #f0f2f5;">
+    <div class="container d-flex justify-content-center align-items-center min-vh-100">
+        <div class="row w-100 m-4">
+            <div class="col-md-6 mx-auto">
+                <div class="card shadow-sm" style="background-color: #F5F5DC;">
+                    <div class="card-body p-4 mb-3">
+                        <h2 class="card-title mb-4 text-center" style="color: #800020">Editing Profile</h2>
+
+                        @if (TempData["Error"] != null)
+                        {
+                            <div class="alert alert-danger">
+                                <span><b>Sorry!</b> - @TempData["Error"]</span>
+                            </div>
+                        }
+
+                        <form asp-action="Edit" method="post">
+                            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                            <div class="mb-3">
+                                <label asp-for="FirstName" class="form-label" style="color: #800020">First Name</label>
+                                <input asp-for="FirstName" class="form-control" style="background-color: transparent; border: none; border-bottom: 2px solid #800020;" placeholder="Enter your First Name" />
+                                <span asp-validation-for="FirstName" class="text-danger"></span>
+                            </div>
+                            <div class="mb-3">
+                                <label asp-for="LastName" class="form-label" style="color: #800020">Last Name</label>
+                                <input asp-for="LastName" class="form-control" style="background-color: transparent; border: none; border-bottom: 2px solid #800020;" placeholder="Enter your Last Name" />
+                                <span asp-validation-for="LastName" class="text-danger"></span>
+                            </div>
+                            <div class="mb-3">
+                                <label asp-for="EmailAddress" class="form-label" style="color: #800020">Email Address</label>
+                                <input asp-for="EmailAddress" class="form-control" style="background-color: transparent; border: none; border-bottom: 2px solid #800020;" placeholder="Enter your Email Address" readonly />
+                                <span asp-validation-for="EmailAddress" class="text-danger"></span>
+                            </div>
+                            <div class="mb-3">
+                                <label asp-for="Password" class="form-label" style="color: #800020">Password</label>
+                                <input asp-for="Password" type="password" class="form-control" style="background-color: transparent; border: none; border-bottom: 2px solid #800020;" placeholder="Enter your Password" />
+                                <span asp-validation-for="Password" class="text-danger"></span>
+                            </div>
+                            <div class="mb-3">
+                                <label asp-for="ConfirmPassword" class="form-label" style="color: #800020">Confirm Your Password</label>
+                                <input asp-for="ConfirmPassword" type="password" class="form-control" style="background-color: transparent; border: none; border-bottom: 2px solid #800020;" placeholder="Confirm Password" />
+                                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                            </div>
+
+                            <div class="mb-3 mt-3">
+                                <button type="submit" class="btn btn-primary w-100" style="background-color: #800020; border-radius: 30px;">Edit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+</body>
+</html>

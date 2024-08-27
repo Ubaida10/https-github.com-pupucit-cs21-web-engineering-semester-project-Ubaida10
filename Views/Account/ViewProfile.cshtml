@@ -1,0 +1,47 @@
+@{
+    ViewBag.Title = "Your Profile";
+    var email = Context.Session.GetString("UserEmail");
+    var firstName = Context.Session.GetString("FirstName");
+    var lastName = Context.Session.GetString("LastName");
+    var password = Context.Session.GetString("Password");
+    var name = firstName + " " + lastName;
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-header" style="background-color: #800020;color:  #F5F5DC;">
+                    <h4 class="mb-0">Your Profile</h4>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3 row">
+                        <label for="Name" class="col-sm-3 col-form-label">Name:</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="Name" value="@Html.Raw(name)" readonly />
+                        </div>
+                    </div>
+
+                    <div class="mb-3 row">
+                        <label for="Email" class="col-sm-3 col-form-label">Email:</label>
+                        <div class="col-sm-9">
+                            <input type="email" class="form-control" id="Email" value="@Html.Raw(email)" readonly />
+                        </div>
+                    </div>
+
+                    <div class="mb-3 row">
+                        <label for="Password" class="col-sm-3 col-form-label">Password:</label>
+                        <div class="col-sm-9">
+                            <input type="password" class="form-control" id="Password" value="@Html.Raw(password)" readonly />
+                        </div>
+                    </div>
+
+                    <div class="mt-4 text-center">
+                        <a href="@Url.Action("Edit", "Account", new { id = email})" class="btn" style="background-color: #800020;color:  #F5F5DC;">Edit Profile</a>
+                        <a href="@Url.Action("Dashboard", "Account")" class="btn btn-secondary ml-2">Back to Dashboard</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

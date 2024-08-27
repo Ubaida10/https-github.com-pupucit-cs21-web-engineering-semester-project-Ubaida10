@@ -1,0 +1,94 @@
+@{
+    ViewData["Title"] = "User Dashboard";
+    var userEmail = Context.Session.GetString("UserEmail");
+    var userRole = Context.Session.GetString("UserRole");
+}
+
+<div class="container my-5">
+    <div class="row">
+        <div class="col-lg-3 col-md-4">
+            <!-- Sidebar -->
+            <div class="list-group">
+                <a href="#" class="list-group-item list-group-item-action active" style="background-color: #800020; color: white">
+                    Dashboard
+                </a>
+                <a href="@Url.Action("ViewProfile", "Account")" class="list-group-item list-group-item-action" style="background-color: #F5F5DC;; color: #800020">My Profile</a>
+                <a href="#" class="list-group-item list-group-item-action" style="background-color: #F5F5DC;; color: #800020">Settings</a>
+                <a href="@Url.Action("Logout", "Account")" class="list-group-item list-group-item-action text-danger" style="background-color: #F5F5DC;; color: #800020">Logout</a>
+                <a href="@Url.Action("Delete", "Account")" class="list-group-item list-group-item-action" style="background-color: #F5F5DC;; color: #800020">Delete Account</a>
+            </div>
+        </div>
+
+        <div class="col-lg-9 col-md-8">
+            <!-- Main content -->
+            <div class="card" style="background-color: #F5F5DC;; color: #800020">
+                <div class="card-header text-white"  style="background-color: #800020; color: white">
+                    Welcome, @userEmail!
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Your Role: @userRole</h5>
+                    <p class="card-text">
+                        Here is an overview of your recent activities and other important information.
+                    </p>
+
+                    <hr />
+
+                    <!-- Example cards for activities or notices -->
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <div class="card h-100 shadow-sm" style="background-color: #F5F5DC; color: #800020">
+                                <div class="card-body text-center">
+                                    <h5 class="card-title">Recent Orders</h5>
+                                    <p class="card-text">View your recent purchase history and track your orders.</p>
+                                    <a href="@Url.Action("Index", "Orders")" class="btn" style="background-color: #800020;color:  #F5F5DC;">View Orders</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="card h-100 shadow-sm" style="background-color: #F5F5DC; color: #800020">
+                                <div class="card-body text-center">
+                                    <h5 class="card-title">Profile Settings</h5>
+                                    <p class="card-text">Update your personal information and change your password.</p>
+                                    <a href="#" class="btn" style="background-color: #800020;color:  #F5F5DC;">Edit Profile</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="card h-100 shadow-sm" style="background-color: #F5F5DC; color: #800020">
+                                <div class="card-body text-center">
+                                    <h5 class="card-title">Support</h5>
+                                    <p class="card-text">Need help? Contact our support team for assistance.</p>
+                                    <a href="#" class="btn" style="background-color: #800020;color:  #F5F5DC;">Get Support</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr />
+
+                    <h5>Notifications</h5>
+                    <div>
+                        <ul class="list-group">
+                            <li class="list-group-item" style="background-color: #F5F5DC; color: #800020">You have a new message.</li>
+                            <li class="list-group-item" style="background-color: #F5F5DC; color: #800020">Your order has been shipped.</li>
+                            <li class="list-group-item" style="background-color: #F5F5DC; color: #800020">Update your profile for better security.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .card {
+        border-radius: 10px;
+    }
+    .list-group-item.active {
+        background-color: #007bff;
+        border-color: #007bff;
+    }
+    .list-group-item-action:hover {
+        background-color: #f8f9fa;
+    }
+</style>

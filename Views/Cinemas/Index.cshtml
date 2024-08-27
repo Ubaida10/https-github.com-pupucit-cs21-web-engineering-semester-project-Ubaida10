@@ -1,0 +1,51 @@
+@model IEnumerable<CineTix.Models.Entity_Classes.Cinema>
+
+@{
+    ViewData["Title"] = "List of Cinemas";
+}
+
+<div class="container">
+    <h1 class="my-4 text-center" style="color: #F5F5DC;">Cinemas</h1>
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <table class="table" style="color: #F5F5DC;">
+                <thead class="thead-light text-center">
+                    <tr>
+                        <th>Logo</th>
+                        <th>Name</th>
+                        <th>Location</th>
+                        <th>Description</th>
+                        <th>Contact Info</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var cinema in Model)
+                    {
+                        <tr>
+                            <td class="text-center align-middle">
+                                <img src="@cinema.CinemaLogoUrl" alt="@cinema.Name" class="rounded-circle" style="max-width: 100px;" />
+                            </td>
+                            <td class="align-middle text-center">@cinema.Name</td>
+                            <td class="align-middle">@cinema.Description.Substring(0, 100)</td>
+                            <td class="align-middle">@cinema.Location</td>
+                            <td class="align-middle">@cinema.ContactInfo</td>
+                            
+                            <td class="text-center align-middle">
+                                <a href="@Url.Action("Edit", "Cinemas", new { id = cinema.Id })" class="btn btn-outline-primary btn-sm mb-2 mx-1">
+                                    <i class="bi bi-pencil-square"></i> Edit
+                                </a>
+                                <a href="@Url.Action("Details", "Cinemas", new { id = cinema.Id })" class="btn btn-outline-info btn-sm mb-2 mx-1">
+                                    <i class="bi bi-eye"></i> Details
+                                </a>
+                                <a href="@Url.Action("Delete", "Cinemas", new { id = cinema.Id })" class="btn btn-danger btn-sm mb-2 mx-1">
+                                    <i class="bi bi-trash"></i> Delete
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

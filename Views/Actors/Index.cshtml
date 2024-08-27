@@ -1,0 +1,59 @@
+@model IEnumerable<CineTix.Models.Entity_Classes.Actor>
+
+@{
+    ViewData["Title"] = "List Of Actors";
+    var userRole = Context.Session.GetString("UserRole");
+}
+
+<div class="container">
+    <h1 class="my-4 text-center" style="color: #F5F5DC;">Actors</h1>
+    @if (User.Identity.IsAuthenticated)
+    {
+        <div class="text-end mb-5">
+            <a href="@Url.Action("Create", "Actors")" class="btn btn-primary">Add New Actor</a>
+        </div>
+    }
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table" style="color: #F5F5DC">
+                <thead class="thead-dark text-center">
+                    <tr>
+                        <th>Profile Picture</th>
+                        <th>Full Name</th>
+                        <th>Date of Birth</th>
+                        <th>Biography</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var actor in Model)
+                    {
+                        <tr>
+                            <td class="text-center align-middle">
+                                <img src="@actor.ProfilePictureUrl" alt="@actor.Name" class="rounded-circle" style="max-width: 175px;" />
+                            </td>
+                            <td class="align-middle">@actor.Name</td>
+                            <td class="align-middle">@actor.DateOfBirth.ToString("yyyy-MM-dd")</td>
+                            <td class="align-middle">@actor.Biography.Substring(0, 100)</td>
+                            <td class="text-center align-middle">
+                                <a href="@Url.Action("Details", "Actors", new { id = actor.Id })" class="btn btn-outline-info mb-2">
+                                    <i class="bi bi-eye"></i> Details
+                                </a>
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    <a href="@Url.Action("Edit", "Actors", new { id = actor.Id })" class="btn btn-outline-primary mb-2">
+                                        <i class="bi bi-pencil-square"></i> Edit
+                                    </a>
+                                    <a href="@Url.Action("Delete", "Actors", new { id = actor.Id })" class="btn btn-danger text-white mb-2">
+                                        <i class="bi bi-trash"></i> Delete
+                                    </a>
+                                }
+                                
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,64 @@
+@*Define model*@
+
+@*Define ViewData*@
+
+
+@*Write Code*@
+@model IEnumerable<CineTix.Models.Entity_Classes.Producer>
+
+@{
+    ViewData["Title"] = "List of Producers";
+    var userRole = Context.Session.GetString("UserRole");
+}
+
+<div class="container">
+    <h1 class="my-4 text-center" style="color: #F5F5DC;">Producers</h1>
+    @if (User.Identity.IsAuthenticated)
+    {
+        <div class="text-end mb-5">
+            <a href="@Url.Action("Create", "Producers")" class="btn btn-primary">Add New Producer</a>
+        </div>
+    }
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table" style="color: #F5F5DC;">
+                <thead class="thead-dark text-center">
+                    <tr>
+                        <th>Profile Picture</th>
+                        <th>Full Name</th>
+                        <th>Date Of Birth</th>
+                        <th>Bio</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var producer in Model)
+                    {
+                        <tr>
+                            <td class="text-center align-middle">
+                                <img src="@producer.ProfilePictureUrl" alt="@producer.Name" class="rounded-circle" style="max-width: 175px;" />
+                            </td>
+                            <td class="align-middle">@producer.Name</td>
+                            <td class="align-middle">@producer.DateOfBirth.ToString("yyyy-MM-dd")</td>
+                            <td class="align-middle">@producer.Biography.Substring(0,100)</td>
+                            <td class="text-center align-middle">
+                                <a href="@Url.Action("Details", "Producers", new { id = producer.Id })" class="btn btn-outline-info mb-2">
+                                    <i class="bi bi-eye"></i> Details
+                                </a>
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    <a href="@Url.Action("Edit", "Producers", new { id = producer.Id })" class="btn btn-outline-primary mb-2">
+                                        <i class="bi bi-pencil-square"></i> Edit
+                                    </a>
+                                    <a href="@Url.Action("Delete", "Producers", new { id = producer.Id })" class="btn btn-danger text-white mb-2">
+                                        <i class="bi bi-trash"></i> Delete
+                                    </a>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

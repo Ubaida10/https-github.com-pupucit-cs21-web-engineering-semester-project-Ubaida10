@@ -1,0 +1,66 @@
+@model CineTix.Models.Entity_Classes.Cinema
+
+@{
+    ViewData["Title"] = "Update Cinema";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>@ViewData["Title"] - CineTix</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
+</head>
+<body style="background-color: #F5F5DC;">
+    <div class="container mt-5">
+        <div class="row justify-content-center mb-5">
+            <div class="col-md-8 col-lg-6">
+                <div class="bg-white p-5 rounded shadow-sm">
+                    <div class="card-header text-center" style="background-color: transparent">
+                        <h1 style="color: #800020;">Update Cinema</h1>
+                    </div>
+                    <form asp-action="Edit">
+                        <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+                        <div class="form-group text-center mb-4">
+                            <img id="ProfilePicturePreview" src="@Model.CinemaLogoUrl" class="border-info rounded-circle" style="max-width: 150px; max-height: 150px;" />
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="Name" class="form-label" style="color: #800020">Name</label>
+                            <input asp-for="Name" class="form-control" style="border: none; border-bottom: 2px solid #800020;color: black" placeholder="Enter cinema's name" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="CinemaLogoUrl" class="form-label" style="color: #800020">Cinema Logo URL</label>
+                            <input asp-for="CinemaLogoUrl" class="form-control"  style="border: none; border-bottom: 2px solid #800020;color: black" placeholder="Enter profile picture URL" />
+                            <span asp-validation-for="CinemaLogoUrl" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="Location" class="form-label"  style="color: #800020">Location</label>
+                            <input asp-for="Location" class="form-control"  style="border: none; border-bottom: 2px solid #800020;color: black" placeholder="Enter cinema's Location" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label asp-for="ContactInfo" class="form-label" style="color: #800020">Contact Info</label>
+                            <input asp-for="Name" class="form-control"  style="border: none; border-bottom: 2px solid #800020;color: black" placeholder="Enter cinema's Contact Info" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mb-4">
+                            <label asp-for="Description" class="form-label" style="color: #800020">Description</label>
+                            <textarea asp-for="Description" class="form-control" rows="5"  style="border: none; border-bottom: 2px solid #800020;color: black" placeholder="Enter actor's biography"></textarea>
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
+
+                        <div class="d-grid gap-2 mb-3">
+                            <button type="submit" class="btn mt-3 mb-4" style="background-color: #800020; border-radius: 30px;color: white">Update</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

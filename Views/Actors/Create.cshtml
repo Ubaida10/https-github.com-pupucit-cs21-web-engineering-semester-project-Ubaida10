@@ -1,0 +1,66 @@
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model CineTix.Models.Entity_Classes.Actor
+
+@{
+    ViewData["Title"] = "Add a New Actor";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"] - CineTix</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+</head>
+<body style="background-color: #F5F5DC;">
+<div class="container mt-5">
+    <div class="row justify-content-center mb-5">
+        <div class="col-md-8 col-lg-6">
+            <div class="bg-white p-5 rounded shadow-sm">
+                <div class="card-header text-center" style="background-color: transparent">
+                    <h1 style="color: #800020;">Adding Actor</h1>
+                </div>
+                <form id="createActorForm" asp-action="Create" enctype="multipart/form-data" >
+                    <div id="validationSummary" class="alert alert-danger" style="display:none;"></div>
+
+                    <div class="form-group text-center mb-4">
+                        <img id="ProfilePicturePreview" src="@Model.ProfilePictureUrl" class="border-info rounded-circle" style="max-width: 150px; max-height: 150px;" />
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label asp-for="Name" class="form-label" style="color: #800020">Name</label>
+                        <input asp-for="Name" class="form-control" style="border: none; border-bottom: 2px solid #800020;color: black" placeholder="Enter actor's name" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label asp-for="ProfilePictureUrl" class="form-label" style="color: #800020">Upload Profile Picture</label>
+                        <input type="file" name="ProfilePictureUpload" class="form-control" style="border: none; border-bottom: 2px solid #800020; color: black" />
+                        <span asp-validation-for="ProfilePictureUrl" class="text-danger"></span>
+                    </div>
+
+
+                    <div class="form-group mb-3">
+                        <label asp-for="DateOfBirth" class="form-label" style="color: #800020">Date of Birth</label>
+                        <input asp-for="DateOfBirth" type="date" class="form-control" style="background-color: transparent;border: none;border-bottom: 2px solid #800020; color:black;" />
+                        <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-4">
+                        <label asp-for="Biography" class="form-label" style="color: #800020">Description</label>
+                        <textarea asp-for="Biography" class="form-control" rows="5"  style="border: none; border-bottom: 2px solid #800020;color: black" placeholder="Enter actors's biography"></textarea>
+                        <span asp-validation-for="Biography" class="text-danger"></span>
+                    </div>
+                    <div class="d-grid gap-2 mb-3">
+                        <button type="submit" class="btn mt-3 mb-4" style="background-color: #800020; border-radius: 30px;color: white">Create</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Including external JavaScript-->
+<script src="~/js/ActorCreation.js"></script>
+</body>
+</html>

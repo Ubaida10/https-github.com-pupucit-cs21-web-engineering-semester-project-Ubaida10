@@ -1,0 +1,56 @@
+@model List<CineTix.Models.Entity_Classes.Order>
+
+@{ 
+    ViewData["Title"] = "All orders";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
+</head>
+<body class="d-flex flex-column min-vh-100">
+    <div class="container flex-grow-1">
+        <div class="row">
+            <div class="col-md-8 offset-2">
+                <h1 style="color: #F5F5DC;">List Of All Your Orders</h1>
+                <table class="table" style="color: #F5F5DC;">
+                    <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Items</th>
+                            <th>Total</th>
+                            <th>User</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var order in Model)
+                        {
+                            <tr>
+                                <td class="align-middle">@order.Id</td>
+                                <td class="align-middle">
+                                    <ul style="list-style-type:none">
+                                        @foreach (var item in order.OrderItems)
+                                        {
+                                            <li>
+                                                <span class="badge bg-success">@item.Amount</span> [@item.Price.ToString("c")] - @item.Movie.Title
+                                            </li>
+                                        }
+                                    </ul>
+                                </td>
+                                <td class="align-middle">
+                                    @order.OrderItems.Select(m => m.Movie.Price * m.Amount).Sum().ToString("c")
+                                </td>
+                                <td class="align-middle">@order.User.Name</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
