@@ -68,11 +68,6 @@
                         </div>
                         <div class="col-md-6">
                             <div class="mb-3">
-                                <label asp-for="CinemaId" class="form-label" style="color: #800020">Cinema</label>
-                                <select asp-for="CinemaId" class="form-select" asp-items="ViewBag.Cinemas" style="background-color: transparent;border: none;border-bottom: 2px solid #800020; color:black; "></select>
-                                <span asp-validation-for="CinemaId" class="text-danger"></span>
-                            </div>
-                            <div class="mb-3">
                                 <label asp-for="Genre" class="form-label" style="color: #800020">Genre</label>
                                 <select asp-for="Genre" class="form-select" asp-items="Html.GetEnumSelectList<Genre>()" style="background-color: transparent;border: none;border-bottom: 2px solid #800020; color:black;"></select>
                                 <span asp-validation-for="Genre" class="text-danger"></span>

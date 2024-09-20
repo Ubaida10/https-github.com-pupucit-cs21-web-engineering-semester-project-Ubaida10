@@ -15,7 +15,7 @@ public class MovieRepository : GenericRepository<Movie>, IMovieRepository
     {
         using (SqlConnection connection = new SqlConnection(_connectionString))
         {
-            string query = "INSERT INTO Movies(Title, Synopsis, Duration, ReleaseDate, Price, ImageUrl, RottenTomatoScore, Genre, ProducerID, CinemaID, ActorID, PortraitUrl) VALUES (@Title, @Synopsis, @Duration, @ReleaseDate, @Price, @ImageUrl, @RottenTomatoScore, @Genre, @ProducerID, @CinemaID, @ActorID, @PortraitUrl);SELECT SCOPE_IDENTITY()";
+            string query = "INSERT INTO Movies(Title, Synopsis, Duration, ReleaseDate, Price, ImageUrl, RottenTomatoScore, Genre, ProducerID, ActorID, PortraitUrl) VALUES (@Title, @Synopsis, @Duration, @ReleaseDate, @Price, @ImageUrl, @RottenTomatoScore, @Genre, @ProducerID, @ActorID, @PortraitUrl);SELECT SCOPE_IDENTITY()";
             SqlCommand command = new SqlCommand(query, connection);
             
             command.Parameters.AddWithValue("@Title", movie.Title);
@@ -27,7 +27,7 @@ public class MovieRepository : GenericRepository<Movie>, IMovieRepository
             command.Parameters.AddWithValue("@RottenTomatoScore", movie.RottenTomatoScore);
             command.Parameters.AddWithValue("@Genre", movie.Genre);
             command.Parameters.AddWithValue("@ProducerID", movie.ProducerId);
-            command.Parameters.AddWithValue("@CinemaID", movie.CinemaId);
+            //command.Parameters.AddWithValue("@CinemaID", movie.CinemaId);
             command.Parameters.AddWithValue("@ActorID", movie.ActorId);
             command.Parameters.AddWithValue("PortraitUrl", movie.PortraitUrl);
             
@@ -71,10 +71,10 @@ public class MovieRepository : GenericRepository<Movie>, IMovieRepository
                             ImageUrl = reader.GetString(6),
                             RottenTomatoScore = reader.GetInt32(7),
                             Genre = (Genre)reader.GetInt32(8),
-                            CinemaId = reader.GetInt32(9),
-                            ProducerId = reader.GetInt32(10),
-                            ActorId = reader.GetInt32(11),
-                            PortraitUrl = reader.GetString(12)
+                            //CinemaId = reader.GetInt32(9),
+                            ProducerId = reader.GetInt32(9),
+                            ActorId = reader.GetInt32(10),
+                            PortraitUrl = reader.GetString(11)
                         };
                     }
                     else
@@ -92,7 +92,7 @@ public class MovieRepository : GenericRepository<Movie>, IMovieRepository
     {
         using (SqlConnection connection = new SqlConnection(_connectionString))
         {
-            string query = @"UPDATE Movies SET Title = @Title, Synopsis = @Synopsis, Duration = @Duration, ReleaseDate = @ReleaseDate, Price = @Price, ImageUrl = @ImageUrl, RottenTomatoScore = @RottenTomatoScore, Genre = @Genre, ProducerID = @ProducerID, CinemaID = @CinemaID, ActorID = @ActorID, PortraitUrl = @PortraitUrl WHERE Id = @Id";
+            string query = @"UPDATE Movies SET Title = @Title, Synopsis = @Synopsis, Duration = @Duration, ReleaseDate = @ReleaseDate, Price = @Price, ImageUrl = @ImageUrl, RottenTomatoScore = @RottenTomatoScore, Genre = @Genre, ProducerID = @ProducerID, ActorID = @ActorID, PortraitUrl = @PortraitUrl WHERE Id = @Id";
             SqlCommand command = new SqlCommand(query, connection);
             command.Parameters.AddWithValue("@Id", movie.Id);
             command.Parameters.AddWithValue("@Title", movie.Title);
@@ -104,7 +104,7 @@ public class MovieRepository : GenericRepository<Movie>, IMovieRepository
             command.Parameters.AddWithValue("@RottenTomatoScore", movie.RottenTomatoScore);
             command.Parameters.AddWithValue("@Genre", movie.Genre);
             command.Parameters.AddWithValue("@ProducerID", movie.ProducerId);
-            command.Parameters.AddWithValue("@CinemaID", movie.CinemaId);
+            //command.Parameters.AddWithValue("@CinemaID", movie.CinemaId);
             command.Parameters.AddWithValue("@ActorID", movie.ActorId); 
             command.Parameters.AddWithValue("PortraitUrl", movie.PortraitUrl);
             connection.Open();

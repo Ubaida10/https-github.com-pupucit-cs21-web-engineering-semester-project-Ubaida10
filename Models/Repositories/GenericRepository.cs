@@ -9,7 +9,7 @@ namespace CineTix.Models.Repositories
 
         public GenericRepository()
         {
-            _connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=eTicketProject;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False"; ;
+            _connectionString = @"Server=(localdb)\MSSQLLocalDB"; ;
         }
 
         public IEnumerable<T> GetAll()

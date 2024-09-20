@@ -4,8 +4,8 @@
     var userRole = Context.Session.GetString("UserRole");
     var userEmail = Context.Session.GetString("UserEmail");
 }
-<div class="container mt-5">
-    <div class="card mb-3" style="background-color: transparent; color: white">
+<h5 class="card-title">@Model.Title</h5>
+    <div id="search-results" class="card mb-3" style="background-color: transparent; color: white">
         <div class="row g-0">
             <div class="col-md-4" style="height: auto">
                 <img src="@Model.ImageUrl" class="img-fluid rounded-start" alt="@Model.Title">
@@ -19,19 +19,6 @@
                     <p class="card-text"><strong>Price: </strong>@Model.Price.ToString("c")</p>
                     <p class="card-text"><strong><i class="fas fa-star" style="color: gold"></i> Rotten Tomato Score: </strong>@Model.RottenTomatoScore%</p>
                     <p class="card-text"><strong>Genre: </strong>@Model.Genre</p>
-                    <p class="card-text">
-                        <strong>Cinema: </strong>
-                        @if (Model.Cinema != null)
-                        {
-                            <a asp-controller="Cinemas" asp-action="Details" asp-route-id="@Model.CinemaId">
-                                @Model.Cinema.Name
-                            </a>
-                        }
-                        else
-                        {
-                            <span>Not Available</span>
-                        }
-                    </p>
                     <p class="card-text">
                         <strong>Producer: </strong>
                         @if (Model.Producer != null)
@@ -51,7 +38,7 @@
                         {
                             <a asp-controller="Actors" asp-action="Details" asp-route-id="@Model.ActorId">
                                 @Model.Actor.Name
-                            </a>     
+                            </a>
                         }
                         else
                         {
@@ -81,4 +68,3 @@
             </div>
         </div>
     </div>
-</div>

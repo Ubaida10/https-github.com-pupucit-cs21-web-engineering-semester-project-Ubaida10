@@ -32,7 +32,7 @@ public class ProducersController : Controller
     public IActionResult Create(Producer producer, IFormFile ProfilePictureUpload)
     {
 
-        if (ProfilePictureUpload != null && ProfilePictureUpload.Length > 0)
+        if (ProfilePictureUpload?.Length>0)
         {
             string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "Images", "Producers");
             string uniqueFileName = Guid.NewGuid().ToString() + "_" + ProfilePictureUpload.FileName;
@@ -50,12 +50,12 @@ public class ProducersController : Controller
 
             producer.ProfilePictureUrl = "/Images/Producers/" + uniqueFileName;
             _producerRepository.Add(producer);
-            return RedirectToAction("Index");
+            return RedirectToAction(nameof(Index));
         }
 
-        else {
-            return View(producer);
-        }
+        
+        return View(producer);
+        
     }
 
 

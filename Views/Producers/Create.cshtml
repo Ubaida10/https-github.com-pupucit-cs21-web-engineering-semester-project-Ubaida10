@@ -20,9 +20,9 @@
         <div class="col-md-8 col-lg-6">
             <div class="bg-white p-5 rounded shadow-sm">
                 <div class="card-header text-center" style="background-color: transparent">
-                    <h1 style="color: #800020;">Adding Producer</h1>
+                    <h1 style="color: #800020;">Adding Actor</h1>
                 </div>
-                <form id="createProducerForm" asp-action="Create" enctype="multipart/form-data">
+                <form id="createProducerForm" asp-action="Create" enctype="multipart/form-data" >
                     <div id="validationSummary" class="alert alert-danger" style="display:none;"></div>
 
                     <div class="form-group text-center mb-4">
@@ -31,15 +31,16 @@
 
                     <div class="form-group mb-3">
                         <label asp-for="Name" class="form-label" style="color: #800020">Name</label>
-                        <input asp-for="Name" class="form-control" style="border: none; border-bottom: 2px solid #800020;color: black" placeholder="Enter producer's name" />
+                        <input asp-for="Name" class="form-control" style="border: none; border-bottom: 2px solid #800020;color: black" placeholder="Enter actor's name" />
                         <span asp-validation-for="Name" class="text-danger"></span>
                     </div>
 
                     <div class="form-group mb-3">
                         <label asp-for="ProfilePictureUrl" class="form-label" style="color: #800020">Upload Profile Picture</label>
-                        <input type="file" name="ProfilePictureUpload" class="form-control"  style="border: none; border-bottom: 2px solid #800020;color: black"/>
+                        <input type="file" name="ProfilePictureUpload" class="form-control" style="border: none; border-bottom: 2px solid #800020; color: black" />
                         <span asp-validation-for="ProfilePictureUrl" class="text-danger"></span>
                     </div>
+
 
                     <div class="form-group mb-3">
                         <label asp-for="DateOfBirth" class="form-label" style="color: #800020">Date of Birth</label>
@@ -48,10 +49,9 @@
                     </div>
                     <div class="form-group mb-4">
                         <label asp-for="Biography" class="form-label" style="color: #800020">Description</label>
-                        <textarea asp-for="Biography" class="form-control" rows="5"  style="border: none; border-bottom: 2px solid #800020;color: black" placeholder="Enter producer's biography"></textarea>
+                        <textarea asp-for="Biography" class="form-control" rows="5"  style="border: none; border-bottom: 2px solid #800020;color: black" placeholder="Enter actors's biography"></textarea>
                         <span asp-validation-for="Biography" class="text-danger"></span>
                     </div>
-
                     <div class="d-grid gap-2 mb-3">
                         <button type="submit" class="btn mt-3 mb-4" style="background-color: #800020; border-radius: 30px;color: white">Create</button>
                     </div>
@@ -60,6 +60,7 @@
         </div>
     </div>
 </div>
-<script src="~/js/ProducerCreation.js"></script>
+<!--Including external JavaScript-->
+
 </body>
 </html>

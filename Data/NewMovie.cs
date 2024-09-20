@@ -50,10 +50,11 @@ public class NewMovie
     [Required(ErrorMessage = "Movie actor is required")]
     public int ActorId { get; set; }
 
+    /*
     [Display(Name = "Select a cinema")]
     [Required(ErrorMessage = "Movie cinema is required")]
     public int CinemaId { get; set; }
-
+    */
     [Display(Name = "Select a producer")]
     [Required(ErrorMessage = "Movie producer is required")]
     public int ProducerId { get; set; }
