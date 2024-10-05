@@ -67,16 +67,18 @@
                                 <a class="nav-link dropdown-toggle" href="#" id="accountDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     <i class="bi bi-person-circle"></i> Account
                                 </a>
-                                @if (Context.Session.GetString("UserEmail") == null)
+                                @if (!User.Identity.IsAuthenticated)
                                 {
                                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="accountDropdown" style="background-color: black; color:white">
-                                        <li><a class="dropdown-item" asp-area="Identity" asp-page="/Account/Login" style="color: white"><i class="bi bi-box-arrow-in-right"></i> Login</a></li>                   
+                                        <li><a class="dropdown-item" asp-area="Identity" asp-page="/Account/Login" style="color: white"><i class="bi bi-box-arrow-in-right"></i> Login</a></li>
+                                        <li><a class="dropdown-item" asp-area="Identity" asp-page="/Account/Register" style="color: white"><i class="bi bi-box-arrow-in-right"></i> Register</a></li>
                                     </ul>
                                 }
                                 else
                                 {
                                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="accountDropdown" style="background-color: white">
                                         <li><a class="dropdown-item" asp-controller="Account" asp-action="Dashboard" style="color: black"><i class="bi bi-box-arrow-in-right"></i> Dashboard</a></li>
+                                        <li><a class="dropdown-item" asp-area="Identity" asp-page="/Account/Logout" style="color: black"><i class="bi bi-box-arrow-right-right"></i> Logout</a></li>
                                     </ul>
                                 }
                             </div>

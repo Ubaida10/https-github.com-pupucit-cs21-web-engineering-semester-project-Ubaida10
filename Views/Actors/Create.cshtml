@@ -15,7 +15,7 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
 </head>
 <body style="background-color: #F5F5DC;">
-<div class="container mt-5">
+<div class="container mt-5" id="create-actor-form">
     <div class="row justify-content-center mb-5">
         <div class="col-md-8 col-lg-6">
             <div class="bg-white p-5 rounded shadow-sm">
@@ -58,9 +58,39 @@
                 </form>
             </div>
         </div>
+        <div id="added" class="container mt-5">
+            <script>
+
+                $(document).ready(function () {
+                    $('#createActorForm').on('submit', function (event) {
+                        event.preventDefault();
+
+                        var formData = new FormData(this);
+
+                        $.ajax({
+                            type: 'POST',
+                            url: '@Url.Action("Create", "Actors")',
+                            data: formData,
+                            contentType: false,
+                            processData: false,
+
+
+                            success: function (response) {
+                                console.log(response);
+                                $('#create-actor-form').hide();
+                                $('#added').html(response);
+                            },
+
+                            error: function () {
+                                $('#added').html('<p>An error occurred while processing your request.</p>');
+                            }
+                        });
+
+                    });
+                });
+            </script>
+        </div>
     </div>
 </div>
-<!--Including external JavaScript-->
-<script src="~/js/ActorCreation.js"></script>
 </body>
 </html>

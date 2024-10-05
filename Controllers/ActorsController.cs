@@ -56,11 +56,13 @@ public class ActorsController : Controller
             Console.WriteLine(actor.ProfilePictureUrl);
             // Clear the model state for the ProfilePictureUrl field
             _actorRepository.Add(actor);
-            return RedirectToAction(nameof(Index));
+            var acts = _actorRepository.GetAll();
+            
+            return PartialView("_Added",acts);
         }
 
         // If we got this far, something failed, redisplay form
-        return View(actor);
+        return BadRequest();
     }
 
 

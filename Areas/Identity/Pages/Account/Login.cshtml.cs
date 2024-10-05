@@ -115,6 +115,7 @@ namespace CineTix.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
+                    HttpContext.Session.SetString("UserEmail", Input.Email);
                     return LocalRedirect(returnUrl);
                 }
                 if (result.RequiresTwoFactor)

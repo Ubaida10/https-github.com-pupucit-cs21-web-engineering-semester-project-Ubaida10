@@ -2,6 +2,7 @@ using CineTix.Data;
 using CineTix.Models.Entity_Classes;
 using CineTix.Models.Repositories;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace CineTix.Controllers;
 
@@ -18,45 +19,108 @@ public class OrdersController: Controller
         return View();
     }
     
+    
     public IActionResult ShopingCart(int movieId)
     {
-        // Create an instance of the repository
         var movieRepository = new MovieRepository();
-    
-        // Retrieve the movie from the repository
         var movie = movieRepository.GetById(movieId);
-    
-        // Check if the movie was found
+
         if (movie == null)
         {
-            // Handle the case when the movie is not found
             return NotFound();
         }
 
-        // Create a new cart instance
-        Cart cart = new Cart
+        var cart = GetCartFromSession();
+
+        // Check if the movie is already in the cart
+        var existingItem = cart.Items.FirstOrDefault(item => item.Movie.Id == movie.Id);
+        if (existingItem != null)
         {
-            CartId = "1", // Generate or retrieve the CartId dynamically
-            User = new ApplicationUser { Name = "Abubakar" }, // Assign a real user dynamically
-            Items = new List<ShoppingCartItem>
+            // If it exists, increment the amount
+            existingItem.Amount++;
+        }
+        else
+        {
+            // Otherwise, add a new item
+            cart.Items.Add(new ShoppingCartItem
             {
-                new ShoppingCartItem
-                {
-                    Movie = movie, // Use the existing movie object
-                    Amount = 1
-                }
-            }
-        };
+                Movie = movie,
+                Amount = 1
+            });
+        }
 
-        // Create a list of carts and add the cart to it
-        var carts = new List<Cart> { cart };
+        // Save the updated cart to the session
+        SaveCartToSession(cart);
 
-        // Return the view with the carts list
-        return View(carts);
+        return View(cart);
     }
     
-    public IActionResult RemoveFromCart(int id)
+    [HttpPost]
+    public IActionResult RemoveFromCart(int movieId)
     {
-        return View();
+        var cart = GetCartFromSession();
+
+        // Check if the cart is empty
+        if (cart.Items == null || !cart.Items.Any())
+        {
+            return Json(cart); // Return the empty cart
+        }
+
+        var itemToRemove = cart.Items.FirstOrDefault(item => item.Movie.Id == movieId);
+    
+        if (itemToRemove != null)
+        {
+            if (itemToRemove.Amount > 1)
+            {
+                // Decrease the amount instead of removing the item
+                itemToRemove.Amount--;
+            }
+            else
+            {
+                // Remove the item if the amount is 1
+                cart.Items.Remove(itemToRemove);
+            }
+        
+            SaveCartToSession(cart);
+        }
+
+        // Return the updated cart as JSON
+        return Json(cart);
+    }
+
+
+    
+    public IActionResult UpdateCart(int movieId, int amount)
+    {
+        var cart = GetCartFromSession();
+        var existingItem = cart.Items.FirstOrDefault(item => item.Movie.Id == movieId);
+
+        if (existingItem != null)
+        {
+            // Update the amount if it's greater than zero
+            if (amount <= 0)
+            {
+                cart.Items.Remove(existingItem);
+            }
+            else
+            {
+                existingItem.Amount = amount;
+            }
+        
+            SaveCartToSession(cart);
+        }
+
+        return RedirectToAction("ShopingCart");
+    }
+
+    private Cart GetCartFromSession()
+    {
+        var existingCarts = HttpContext.Session.GetString("Cart");
+        return existingCarts != null ? JsonConvert.DeserializeObject<Cart>(existingCarts) : new Cart { Items = new List<ShoppingCartItem>() };
+    }
+
+    private void SaveCartToSession(Cart cart)
+    {
+        HttpContext.Session.SetString("Cart", JsonConvert.SerializeObject(cart));
     }
 }
